@@ -1,12 +1,25 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const HotelComponent = (props) => {
   const restaurant = props.restaurant;
+  const navigation = useNavigation();
   console.log(restaurant);
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("HotelRoom", {
+          id: restaurant.id,
+          name: restaurant.name,
+          aggregate_rating: restaurant.aggregate_rating,
+          address: restaurant.address,
+          small_address: restaurant.small_address,
+          cuisine: restaurant.cuisines,
+        })
+      }
+    >
       <View style={styles.cardWrapper}>
         <Image
           source={{ uri: restaurant.featured_image }}
@@ -27,13 +40,20 @@ const HotelComponent = (props) => {
         </View>
 
         <View style={styles.imageElements}>
-        <AntDesign name="clockcircleo" size={16} color="#17B169" style={styles.clockIcon} />
+          <AntDesign
+            name="clockcircleo"
+            size={16}
+            color="#17B169"
+            style={styles.clockIcon}
+          />
           <Text>{restaurant.time}</Text>
         </View>
 
         <View style={styles.moneyOffWrapper}>
           <Text style={styles.moneyOff}>{restaurant.offer}</Text>
-          <Text style={styles.averageCost}>Up to £{restaurant.average_cost_for_two}</Text>
+          <Text style={styles.averageCost}>
+            Up to £{restaurant.average_cost_for_two}
+          </Text>
         </View>
 
         <View style={styles.divider} />
@@ -135,21 +155,21 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   imageElements: {
-    position: 'absolute',
+    position: "absolute",
     top: 190,
     right: 10,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 4,
     borderRadius: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   clockIcon: {
     marginRight: 4,
   },
   moneyOffWrapper: {
-    position: 'absolute',
-    backgroundColor: '#6495ED',
+    position: "absolute",
+    backgroundColor: "#6495ED",
     top: 170,
     paddingLeft: 10,
     borderTopRightRadius: 5,
@@ -157,14 +177,14 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   moneyOff: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     marginBottom: 2,
   },
   averageCost: {
-    color: 'black',
-    fontWeight: 'bold',
-  }
+    color: "black",
+    fontWeight: "bold",
+  },
 });
 
 export default HotelComponent;
