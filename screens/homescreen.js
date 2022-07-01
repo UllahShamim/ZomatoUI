@@ -48,7 +48,7 @@ const Homescreen = () => {
         <ItemComponent />
 
         {data.map((item) => (
-          <HotelComponent restaurant={item} />
+          <HotelComponent restaurant={item} key={item.id} />
         ))}
       </ScrollView>
     </SafeAreaView>
