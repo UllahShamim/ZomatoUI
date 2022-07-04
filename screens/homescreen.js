@@ -18,40 +18,40 @@ import HotelComponent from "../components/hotelComponent";
 const Homescreen = () => {
   const data = hotels;
   return (
-    <View style={{backgroundColor: '#F0F0F0'}}>
-    <SafeAreaView style={styles.containerWrapper}>
-      <ScrollView>
-        <View style={styles.searchWrapper}>
-          <AntDesign name="search1" size={20} color="#FF033E" />
-          <TextInput
-            placeholder="Restaurant name, cuisine or a dish"
-            style={styles.searchInput}
-          />
-        </View>
-        <Categories />
-        <Pressable style={styles.pressableWrapper}>
-          <View style={styles.pressableItems}>
-            <Image
-              style={styles.pressableImage}
-              source={{
-                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBjnMjX8qQb9mLh_IBBHP90SZXccv6uTa662T2Ljfp2xrvNO5IrJmgeWC-RpS_Bxkfzak&usqp=CAU",
-              }}
-            />
-            <Image
-              style={styles.pressableImage}
-              source={{
-                uri: "https://cdn.businesstraveller.com/wp-content/uploads/fly-images/1002269/zomato-infinity-dining-916x516-1-916x516.jpg",
-              }}
+    <View style={{ backgroundColor: "#F0F0F0" }}>
+      <SafeAreaView style={styles.containerWrapper}>
+        <ScrollView>
+          <View style={styles.searchWrapper}>
+            <AntDesign name="search1" size={20} color="#FF033E" />
+            <TextInput
+              placeholder="Restaurant name, cuisine or a dish"
+              style={styles.searchInput}
             />
           </View>
-        </Pressable>
-        <ItemComponent />
+          <Categories />
+          <Pressable style={styles.pressableWrapper}>
+            <View style={styles.pressableItems}>
+              <Image
+                style={styles.pressableImage}
+                source={{
+                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBjnMjX8qQb9mLh_IBBHP90SZXccv6uTa662T2Ljfp2xrvNO5IrJmgeWC-RpS_Bxkfzak&usqp=CAU",
+                }}
+              />
+              <Image
+                style={styles.pressableImage}
+                source={{
+                  uri: "https://cdn.businesstraveller.com/wp-content/uploads/fly-images/1002269/zomato-infinity-dining-916x516-1-916x516.jpg",
+                }}
+              />
+            </View>
+          </Pressable>
+          <ItemComponent />
 
-        {data.map((item) => (
-          <HotelComponent restaurant={item} key={item.id} />
-        ))}
-      </ScrollView>
-    </SafeAreaView>
+          {data.map((item) => (
+            <HotelComponent restaurant={item} key={item.id} />
+          ))}
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 };
