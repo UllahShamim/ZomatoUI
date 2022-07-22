@@ -1,116 +1,132 @@
-import React from "react";
-import { View, Text, StyleSheet, SafeAreaView, Pressable, ScrollView } from "react-native";
+import React, { useContext } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+  ScrollView,
+} from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Fontisto } from '@expo/vector-icons';
+import { Fontisto } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Menu from "../components/menu";
+import ViewCart from "../components/viewCart";
 
+import { CartItems } from "../context";
 import menuData from "../data/menuData";
 
 const HotelRoom = () => {
-  const data = menuData;  
+  const data = menuData;
   const route = useRoute();
   const navigation = useNavigation();
+  const { cart, setCart } = useContext(CartItems);
   return (
     <SafeAreaView>
       <ScrollView>
-      <View style={styles.iconMenuWrapper}>
-        <Pressable
-          style={styles.backIconWrapper}
-          onPress={() => navigation.goBack()}
-        >
-          <Ionicons name="chevron-back" size={24} color="#ffffff" />
-        </Pressable>
-        <View style={styles.rightIconsWrapper}>
-          <Pressable style={styles.rightIcon}>
-            <Feather name="camera" size={28} color="black" />
+        <View style={styles.iconMenuWrapper}>
+          <Pressable
+            style={styles.backIconWrapper}
+            onPress={() => navigation.goBack()}
+          >
+            <Ionicons name="chevron-back" size={24} color="#ffffff" />
           </Pressable>
-          <Pressable style={styles.rightIcon}>
-            <Feather name="bookmark" size={28} color="black" />
-          </Pressable>
-          <Pressable style={styles.rightIcon}>
-            <Ionicons name="ios-share-outline" size={29} color="black" />
-          </Pressable>
+          <View style={styles.rightIconsWrapper}>
+            <Pressable style={styles.rightIcon}>
+              <Feather name="camera" size={28} color="black" />
+            </Pressable>
+            <Pressable style={styles.rightIcon}>
+              <Feather name="bookmark" size={28} color="black" />
+            </Pressable>
+            <Pressable style={styles.rightIcon}>
+              <Ionicons name="ios-share-outline" size={29} color="black" />
+            </Pressable>
+          </View>
         </View>
-      </View>
-      <View style={styles.informationWrapper}>
-        <View>
-          <Text style={styles.title}>{route.params.name}</Text>
-          <Text style={styles.subtitle}>{route.params.cuisine}</Text>
-          <Text style={styles.subTitleTitle}>{route.params.small_address}</Text>
-        </View>
-        <View style={styles.ratingInformation}>
-          <View style={styles.rating}>
-            <Text style={styles.ratingText}>
-              {route.params.aggregate_rating}
+        <View style={styles.informationWrapper}>
+          <View>
+            <Text style={styles.title}>{route.params.name}</Text>
+            <Text style={styles.subtitle}>{route.params.cuisine}</Text>
+            <Text style={styles.subTitleTitle}>
+              {route.params.small_address}
             </Text>
-            <FontAwesome
-              name="star"
+          </View>
+          <View style={styles.ratingInformation}>
+            <View style={styles.rating}>
+              <Text style={styles.ratingText}>
+                {route.params.aggregate_rating}
+              </Text>
+              <FontAwesome
+                name="star"
+                size={24}
+                color="#ffffff"
+                style={styles.ratingStar}
+              />
+            </View>
+            <View style={styles.photo}>
+              <Text style={styles.photoText}>30</Text>
+              <Text style={styles.photoText}>PHOTOS</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.deliveryWrapper}>
+          <View style={styles.deliveryInnerWrapper}>
+            <MaterialCommunityIcons
+              name="bike-fast"
               size={24}
-              color="#ffffff"
-              style={styles.ratingStar}
+              color="gray"
+              style={styles.deliveryIcons}
             />
+            <View style={styles.deliveryText}>
+              <Text>Mode</Text>
+              <Text>Delivery</Text>
+            </View>
           </View>
-          <View style={styles.photo}>
-            <Text style={styles.photoText}>30</Text>
-            <Text style={styles.photoText}>PHOTOS</Text>
+          <View style={styles.deliveryInnerWrapper}>
+            <Ionicons
+              name="timer-outline"
+              size={24}
+              color="gray"
+              style={styles.deliveryIcons}
+            />
+            <View style={styles.deliveryText}>
+              <Text>Time</Text>
+              <Text>30 minutes or free</Text>
+            </View>
           </View>
-        </View>
-      </View>
-      <View style={styles.deliveryWrapper}>
-        <View style={styles.deliveryInnerWrapper}>
-          <MaterialCommunityIcons
-            name="bike-fast"
-            size={24}
-            color="gray"
-            style={styles.deliveryIcons}
-          />
-          <View style={styles.deliveryText}>
-            <Text>Mode</Text>
-            <Text>Delivery</Text>
-          </View>
-        </View>
-        <View style={styles.deliveryInnerWrapper}>
-          <Ionicons
-            name="timer-outline"
-            size={24}
-            color="gray"
-            style={styles.deliveryIcons}
-          />
-          <View style={styles.deliveryText}>
-            <Text>Time</Text>
-            <Text>30 minutes or free</Text>
+          <View style={styles.deliveryInnerWrapper}>
+            <MaterialCommunityIcons
+              name="brightness-percent"
+              size={24}
+              color="blue"
+              style={styles.deliveryIcons}
+            />
+            <View style={styles.deliveryText}>
+              <Text>Offers</Text>
+              <Text>View all</Text>
+            </View>
           </View>
         </View>
-        <View style={styles.deliveryInnerWrapper}>
-          <MaterialCommunityIcons
-            name="brightness-percent"
-            size={24}
-            color="blue"
-            style={styles.deliveryIcons}
-          />
-          <View style={styles.deliveryText}>
-            <Text>Offers</Text>
-            <Text>View all</Text>
-          </View>
+        <View style={styles.searchUI}>
+          <Fontisto name="motorcycle" size={24} color="black" />
+          <Text style={styles.searchUIText}>£2.50 additional distance fee</Text>
         </View>
-      </View>
-      <View style={styles.searchUI}>
-        <Fontisto name="motorcycle" size={24} color="black" />
-        <Text style={styles.searchUIText}>£2.50 additional distance fee</Text>
-      </View>
         {/* menu items section */}
-      <View style={styles.menuWrapper}>
-        <Text style={styles.menuTextTitle}>Menu</Text>
-        <View style={styles.menuTextTitleDivider}/>
-      </View>
+        <View style={styles.menuWrapper}>
+          <Text style={styles.menuTextTitle}>Menu</Text>
+          <View style={styles.menuTextTitleDivider} />
+        </View>
 
-      {data.map((item) => <Menu menu={item}/>)}
+        {data.map((item) => (
+          <Menu menu={item} key={item.id} cart={cart} setCart={setCart} />
+        ))}
       </ScrollView>
+
+      <ViewCart restaurantName={route.params.name} />
     </SafeAreaView>
   );
 };
@@ -206,10 +222,10 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   searchUI: {
-    backgroundColor: 'grey',
+    backgroundColor: "grey",
     margin: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 8,
     paddingLeft: 10,
     borderRadius: 7,
@@ -224,10 +240,10 @@ const styles = StyleSheet.create({
   },
   menuTextTitle: {
     fontSize: 17,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   menuTextTitleDivider: {
-    borderColor: '#ff1943',
+    borderColor: "#ff1943",
     borderWidth: 2,
     width: 70,
     marginTop: 4,
